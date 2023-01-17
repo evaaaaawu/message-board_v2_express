@@ -1,25 +1,34 @@
-<h1>簡易會員系統</h1>
+<!DOCTYPE html>
+<html lang="en">
 
-<% if(username) { %>
-  Hi, <%= username %> 
-  <a href="/logout">登出</a>
+<head>
+  <%- include('template/head') %> 
+</head>
 
-  <form method="POST" action="/comments">
-    <textarea name="content" id="" cols="30" rows="10"></textarea>
-    <input type="submit">
-  </form>
-<% } else { %>
-  <a href="/register">註冊</a>
-  <a href="/login">登入</a>
-<% } %>
-
-<% comments.forEach(function(comment) { %> 
-  <div>
-    <h2><%= comment.nickname %></h2>
-    <p><%= comment.content %></p>
-    <% if (username === comment.username) { %>
-      <a href="/update_comments/<%= comment.id %>">編輯</a>
-      <a href="/delete_comments/<%= comment.id %>">刪除</a>
-    <% } %> 
+<body>
+  <%- include('template/navbar') %> 
+  <div class="container">
+      <% if(username) { %>
+        <form>
+          <div method="POST" action="/comments">
+            <label>留言內容</label>
+            <textarea name="content" class="form-control"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">送出留言</button>
+        </form>
+      <% } %>
+      
+      <% comments.forEach(function(comment) { %>
+        <div class="card mt-2" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title"><%= comment.nickname %></h5>
+            <p class="card-text"><%= comment.content %></p>
+            <a class="card-link" href="/update_comments/<%= comment.id %>">編輯</a>
+            <a class="card-link" href="/delete_comments/<%= comment.id %>">刪除</a>
+          </div>
+        </div>
+      <% }) %>
   </div>
-<% }) %>
+</body>
+
+</html>
