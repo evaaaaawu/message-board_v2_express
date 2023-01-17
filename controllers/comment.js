@@ -27,6 +27,18 @@ const commentController = {
     commentModel.delete(req.session.username, req.params.id, err => {
       res.redirect('/')
     })
+  },
+  update: (req,res) => {
+    commentModel.get(req.params.id, (err, result) => {
+      res.render('update', {
+        comment: result
+      })
+    })
+  },
+  handleUpdate: (req, res) => {
+    commentModel.update(req.session.username, req.params.id, req.body.content, err => {
+      res.redirect('/')
+    })
   }
 }
 
