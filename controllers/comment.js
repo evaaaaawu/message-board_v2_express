@@ -22,6 +22,11 @@ const commentController = {
         comments: results
       })
     })
+  },
+  delete: (req, res) => {
+    commentModel.delete(req.session.username, req.params.id, err => {
+      res.redirect('/')
+    })
   }
 }
 
