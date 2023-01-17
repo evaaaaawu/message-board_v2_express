@@ -1,0 +1,10 @@
+node_modules
+package-lock.json
+db.js
+虛擬碼
+*.log
+*.gz
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
