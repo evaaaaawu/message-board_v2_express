@@ -1,23 +1,26 @@
-const db = require('../db')
-
-const userModel = {
-  add: (user, cb) => {
-    db.query(
-      'INSERT INTO users(username, password, nickname) values(?, ?, ?)', 
-      [user.username, user.password, user.nickname], 
-      (err, results) => {
-        if (err) return cb(err);
-        cb(null)
-      });
-  },
-  get: (username, cb) => {
-    db.query(
-      'SELECT * FROM users WHERE username = ?', [username],
-      (err, results) => {
-        if (err) return cb(err);
-        cb(null, results[0])
-      });
+'use strict';
+const {
+  Model
+} = require('sequelize');
+module.exports = (sequelize, DataTypes) => {
+  class User extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      // define association here
+      User.hasMany(models.Comment)
+    }
   }
-}
-
-module.exports = userModel
+  User.init({
+    username: DataTypes.STRING,
+    password: DataTypes.STRING,
+    nickname: DataTypes.STRING
+  }, {
+    sequelize,
+    modelName: 'User',
+  });
+  return User;
+};

@@ -21,10 +21,12 @@
       <% comments.forEach(function(comment) { %>
         <div class="card mt-2" style="width: 18rem;">
           <div class="card-body">
-            <h5 class="card-title"><%= comment.nickname %></h5>
+            <h5 class="card-title"><%= comment.User.nickname %></h5>
             <p class="card-text"><%= comment.content %></p>
-            <a class="card-link" href="/update_comments/<%= comment.id %>">編輯</a>
-            <a class="card-link" href="/delete_comments/<%= comment.id %>">刪除</a>
+            <% if (username === comment.User.username) { %>
+              <a class="card-link" href="/update_comments/<%= comment.id %>">編輯</a>
+              <a class="card-link" href="/delete_comments/<%= comment.id %>">刪除</a>
+            <% } %>
           </div>
         </div>
       <% }) %>

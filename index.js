@@ -3,7 +3,6 @@ const bodyParser = require('body-parser')
 const session = require('express-session')
 const flash = require('connect-flash')
 
-const db = require('./db')
 const app = express()
 const port = 5001
 
@@ -44,6 +43,5 @@ app.get('/update_comments/:id', commentController.update)
 app.post('/update_comments/:id', commentController.handleUpdate)
 
 app.listen(port, () => {
-  db.connect()
   console.log(`Example app is listening on port ${port}`)
 })

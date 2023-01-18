@@ -1,6 +1,7 @@
 node_modules
 package-lock.json
 db.js
+config
 虛擬碼
 *.log
 *.gz
